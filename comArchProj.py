@@ -4,7 +4,6 @@ def instuction(instr):
         return "000"
     if(instr == "nand"):
         return "001"
-    
     #I-Type
     if(instr == "lw"):
         return "010"
@@ -12,6 +11,14 @@ def instuction(instr):
         return "011"
     if(instr == "beq"):
         return "100"
+    #J-type
+    if(instr =="jalr"):
+        return "101"
+    #O-type
+    if(instr =="halt"):
+        return "110"
+    if(instr =="noop"):
+        return "111"
 
 def toBinary(i):
     if i == 0:
