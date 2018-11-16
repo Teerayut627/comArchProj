@@ -42,7 +42,7 @@ with open('D:/CPE/ComArch/test.txt') as f:
     line_label = []
     fill_list = []
     fill_value = []
-    current_address = 0
+    
 
     for i in lines:
         instr = i.split(' ')
@@ -58,6 +58,7 @@ with open('D:/CPE/ComArch/test.txt') as f:
     # print(fill_value)
     
     for i in lines:
+        current_address = 0
         #print(i)
 
         instr = i.split(' ')
@@ -70,12 +71,29 @@ with open('D:/CPE/ComArch/test.txt') as f:
             print(int(bindigits(0,7) + instuction(instr[1]) + bindigits(x,3) + bindigits(y,3) +"0000000000000"+ bindigits(z,3),2)) 
 
         elif(instr[1] == "lw" or instr[1] == "sw"): #I-Type
-           
+            x = int(instr[2])
+            y = int(instr[3])
+            z = instr[4]
+            find = False
+            count = 0
+            while(count < len(line_label)):
+                if(line_label[count] == instr[4]):
+                    find = True
+                    break
+                count = count + 1
+            if(find == True):
+                z = (count - current_address) 
+            print(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16),2))
+
+        elif(instr[1] == ".fill"):
+            x = int(instr[2])
+            print(int(x))
+
 
         elif(instr[1] == "beq"):
             x = int(instr[2])
             y = int(instr[3])
-            #z = int(instr[4])
+        
             count = 0
             while(count < len(line_label)):
                 # print(line_label[count])
@@ -83,8 +101,8 @@ with open('D:/CPE/ComArch/test.txt') as f:
                     break
                 count = count + 1
                 # print(count)
-            go_back = (count - current_address) - 1
-            print(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(go_back,16),2))
+            go_to = (count - current_address) - 1
+            print(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(go_to,16),2))
        
         elif(instr[1] == "jalr"): #J-Type
             x = int(instr[2])
