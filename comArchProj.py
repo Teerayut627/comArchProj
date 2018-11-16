@@ -19,6 +19,7 @@ def instuction(instr):
         return "110"
     if(instr =="noop"):
         return "111"
+    
 
 def toBinary(i):
     if i == 0:
@@ -32,16 +33,40 @@ def toBinary(i):
         i //= 2
     return s.zfill(3)
 
+with open('D:/CPE/ComArch/test.txt') as f:
+    lines = f.readlines()
+    line = -1
+    line_label = []
+    for i in lines:
+       # print(i)
+#user_input = input("Enter instruction , field0 , field1 and field2 : ")
+        instr = i.split(' ')
+        #print(len(instr))
+        line = line + 1
+        line_label.append(instr[0])
+        #print(line_label[0])
+       
+        if(instr[1] == "add" or instr[1] == "nand"): #R-Type
+            x = int(instr[2][1:])
+            y = int(instr[3][1:])
+            z = int(instr[4][1:])
+            print(int("0000000" + instuction(instr[1]) + toBinary(x) + toBinary(y) +"0000000000000"+ toBinary(z),2)) 
 
-user_input = input("Enter instruction , field0 , field1 and field2 : ")
-instr,field0,field1,field2 = user_input.split(' ')
-if(instr == "add" or "nand"): #R-Type
-    x = int(field0[1:])
-    y = int(field1[1:])
-    z = int(field2[1:])
-    print("0000000 " + instuction(instr) +" "+ toBinary(x) +" "+ toBinary(y) +" 0000000000000 "+ toBinary(z))
+        elif(instr[1] == "lw" or instr[1] == "sw" or instr[1] == "beq"): #I-Type
+            x = int(instr[2][1:])
+            y = int(instr[3][1:])
+            #z = int(instr[4])
+            # for count in line_label:
+            #     if(instr[4] == line_label[count]):
+            #         break
+            # z = int(count) 
+            print(int("0000000" + instuction(instr[1]) +toBinary(x) +toBinary(y) +toBinary(z).zfill(16),2))
+                
+        elif(instr[1] == "jalr"): #J-Type
+            x = int(instr[2][1:])
+            print(int("0000000" + instuction(instr[1]) +toBinary(x) +toBinary(y)+"0000000000000000",2))
 
-if(instr == "lw" or "sw" or "beq"): #I-Type
-    x = int(field0[1:])
-    y = int(field1[1:])
-    
+        elif(instr[0] == "halt" or instr[1] == "noop"): #O-Type
+            print(int("0000000" + instuction(instr[1]) +"0000000000000000000000",2))
+       
+            
