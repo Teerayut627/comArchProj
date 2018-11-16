@@ -21,52 +21,66 @@ def instuction(instr):
         return "111"
     
 
-def toBinary(i):
-    if i == 0:
-        return "0".zfill(3)
-    s = ''
-    while i:
-        if i & 1 == 1:
-            s = "1" + s
-        else:
-            s = "0" + s
-        i //= 2
-    return s.zfill(3)
+# def toBinary(i):
+#     if i == 0:
+#         return "0".zfill(3)
+#     s = ''
+#     while i:
+#         if i & 1 == 1:
+#             s = "1" + s
+#         else:
+#             s = "0" + s
+#         i //= 2
+#     return s.zfill(3)
+
+def bindigits(n, bits):
+    s = bin(n & int("1"*bits, 2))[2:]
+    return ("{0:0>%s}" % (bits)).format(s)
 
 with open('D:/CPE/ComArch/test.txt') as f:
     lines = f.readlines()
-    line = -1
     line_label = []
+    current_address = 0
+
     for i in lines:
-       # print(i)
-#user_input = input("Enter instruction , field0 , field1 and field2 : ")
+        instr = i.split(' ')
+        line_label.append(instr[0])
+    
+    for i in lines:
+        #print(i)
+
         instr = i.split(' ')
         #print(len(instr))
-        line = line + 1
-        line_label.append(instr[0])
-        #print(line_label[0])
+
+        # line_label.append(instr[0])
+        # print(line_label)
        
         if(instr[1] == "add" or instr[1] == "nand"): #R-Type
             x = int(instr[2][1:])
             y = int(instr[3][1:])
             z = int(instr[4][1:])
-            print(int("0000000" + instuction(instr[1]) + toBinary(x) + toBinary(y) +"0000000000000"+ toBinary(z),2)) 
+            print(int(bindigits(0,7) + instuction(instr[1]) + bindigits(x,3) + bindigits(y,3) +"0000000000000"+ bindigits(z,3),2)) 
 
         elif(instr[1] == "lw" or instr[1] == "sw" or instr[1] == "beq"): #I-Type
             x = int(instr[2][1:])
             y = int(instr[3][1:])
             #z = int(instr[4])
-            # for count in line_label:
-            #     if(instr[4] == line_label[count]):
-            #         break
-            # z = int(count) 
-            print(int("0000000" + instuction(instr[1]) +toBinary(x) +toBinary(y) +toBinary(z).zfill(16),2))
+            count = 0
+            while(count < len(line_label)):
+                # print(line_label[count])
+                if(line_label[count] == instr[4]):
+                    break
+                count = count + 1
+            go_back = (count - current_address) - 1
+            print(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(go_back,16),2))
                 
         elif(instr[1] == "jalr"): #J-Type
             x = int(instr[2][1:])
-            print(int("0000000" + instuction(instr[1]) +toBinary(x) +toBinary(y)+"0000000000000000",2))
+            print(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3)+bindigits(0,16),2))
 
         elif(instr[0] == "halt" or instr[1] == "noop"): #O-Type
-            print(int("0000000" + instuction(instr[1]) +"0000000000000000000000",2))
-       
+            print(int(bindigits(0,7) + instuction(instr[1]) +bindigits(0,22),2))
+        current_address = current_address + 1   
+
+
             
