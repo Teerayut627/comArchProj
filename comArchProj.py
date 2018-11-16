@@ -40,11 +40,22 @@ def bindigits(n, bits):
 with open('D:/CPE/ComArch/test.txt') as f:
     lines = f.readlines()
     line_label = []
+    fill_list = []
+    fill_value = []
     current_address = 0
 
     for i in lines:
         instr = i.split(' ')
         line_label.append(instr[0])
+
+    for i in lines:
+        instr = i.split(' ')
+        if(instr[1] == ".fill"):
+            fill_list.append(instr[0])
+            fill_value.append(instr[2])
+    
+    # print(fill_list)
+    # print(fill_value)
     
     for i in lines:
         #print(i)
@@ -52,16 +63,16 @@ with open('D:/CPE/ComArch/test.txt') as f:
         instr = i.split(' ')
         #print(len(instr))
 
-        # line_label.append(instr[0])
-        # print(line_label)
-       
         if(instr[1] == "add" or instr[1] == "nand"): #R-Type
             x = int(instr[2])
             y = int(instr[3])
             z = int(instr[4])
             print(int(bindigits(0,7) + instuction(instr[1]) + bindigits(x,3) + bindigits(y,3) +"0000000000000"+ bindigits(z,3),2)) 
 
-        elif(instr[1] == "lw" or instr[1] == "sw" or instr[1] == "beq"): #I-Type
+        elif(instr[1] == "lw" or instr[1] == "sw"): #I-Type
+           
+
+        elif(instr[1] == "beq"):
             x = int(instr[2])
             y = int(instr[3])
             #z = int(instr[4])
@@ -74,7 +85,7 @@ with open('D:/CPE/ComArch/test.txt') as f:
                 # print(count)
             go_back = (count - current_address) - 1
             print(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(go_back,16),2))
-                
+       
         elif(instr[1] == "jalr"): #J-Type
             x = int(instr[2])
             print(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3)+bindigits(0,16),2))
