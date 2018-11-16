@@ -56,14 +56,14 @@ with open('D:/CPE/ComArch/test.txt') as f:
         # print(line_label)
        
         if(instr[1] == "add" or instr[1] == "nand"): #R-Type
-            x = int(instr[2][1:])
-            y = int(instr[3][1:])
-            z = int(instr[4][1:])
+            x = int(instr[2])
+            y = int(instr[3])
+            z = int(instr[4])
             print(int(bindigits(0,7) + instuction(instr[1]) + bindigits(x,3) + bindigits(y,3) +"0000000000000"+ bindigits(z,3),2)) 
 
         elif(instr[1] == "lw" or instr[1] == "sw" or instr[1] == "beq"): #I-Type
-            x = int(instr[2][1:])
-            y = int(instr[3][1:])
+            x = int(instr[2])
+            y = int(instr[3])
             #z = int(instr[4])
             count = 0
             while(count < len(line_label)):
@@ -71,16 +71,14 @@ with open('D:/CPE/ComArch/test.txt') as f:
                 if(line_label[count] == instr[4]):
                     break
                 count = count + 1
+                # print(count)
             go_back = (count - current_address) - 1
             print(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(go_back,16),2))
                 
         elif(instr[1] == "jalr"): #J-Type
-            x = int(instr[2][1:])
+            x = int(instr[2])
             print(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3)+bindigits(0,16),2))
 
         elif(instr[0] == "halt" or instr[1] == "noop"): #O-Type
             print(int(bindigits(0,7) + instuction(instr[1]) +bindigits(0,22),2))
-        current_address = current_address + 1   
-
-
-            
+        current_address = current_address + 1 
