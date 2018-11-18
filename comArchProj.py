@@ -66,6 +66,8 @@ def add_binary_nums(x, y) :
         if carry !=0 : result = '1' + result
         return result.zfill(max_len)
 
+
+decMem = []
 with open('D:/CPE/ComArch/test.txt') as f:
     lines = f.readlines()
     line_label = []
@@ -97,7 +99,7 @@ with open('D:/CPE/ComArch/test.txt') as f:
             x = int(instr[2])
             y = int(instr[3])
             z = int(instr[4])
-            print(int(bindigits(0,7) + instuction(instr[1]) + bindigits(x,3) + bindigits(y,3) +bindigits(0,13)+ bindigits(z,3),2)) 
+            decMem.append(int(bindigits(0,7) + instuction(instr[1]) + bindigits(x,3) + bindigits(y,3) +bindigits(0,13)+ bindigits(z,3),2)) 
             machine = bindigits(0,7) + instuction(instr[1]) + bindigits(x,3) + bindigits(y,3) +bindigits(0,13)+ bindigits(z,3)
     #I-Type
         elif(instr[1] == "lw" or instr[1] == "sw"): 
@@ -113,7 +115,7 @@ with open('D:/CPE/ComArch/test.txt') as f:
                 count = count + 1
             if(find == True):
                 z = (count - current_address)
-            print(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16),2))
+            decMem.append(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16),2))
             machine = bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16)
        
     #.fill
@@ -128,11 +130,11 @@ with open('D:/CPE/ComArch/test.txt') as f:
                 count = count + 1
             if(find == True):
                 z = count
-                print(int(z))
+                decMem.append(int(z))
                 machine = str(int(z))
                 
             else:
-                print(int(x))
+                decMem.append(int(x))
                 machine = str(int(x))
               
     #beq
@@ -150,17 +152,17 @@ with open('D:/CPE/ComArch/test.txt') as f:
                 count = count + 1
             if(find == True): 
                 z = (count - current_address) - 1
-            print(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16),2))
+            decMem.append(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16),2))
             machine = bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16)
            
     #J-Type       
         elif(instr[1] == "jalr"):
             x = int(instr[2])
-            print(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3)+bindigits(0,16),2))
+            decMem.append(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3)+bindigits(0,16),2))
             machine = bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3)+bindigits(0,16)
            
         elif(instr[1] == "halt" or instr[1] == "noop"): #O-Type
-            print(int(bindigits(0,7) + instuction(instr[1]) +bindigits(0,22),2))
+            decMem.append(int(bindigits(0,7) + instuction(instr[1]) +bindigits(0,22),2))
             machine = bindigits(0,7) + instuction(instr[1]) +bindigits(0,22)  
         
         current_address = current_address + 1 
@@ -188,7 +190,7 @@ while(memline < len(mem)):
     print("     memory :")
     i = 0
     while i < (len(mem)):
-        print("     mem[ " + str(i) +  " ] " + mem[i])
+        print("     mem[ " + str(i) +  " ] " + str(decMem[i]))
         i = i + 1
 
     print("register :")
