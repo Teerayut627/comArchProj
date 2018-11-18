@@ -7,3 +7,4 @@ start add 1 2 1
 done halt 
 five .fill 5
 neg1 .fill -1
+srAddr .fill start 
