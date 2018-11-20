@@ -53,7 +53,9 @@ while (strLines < len(memDecimal)):
     strLines = strLines + 1
 
 #------------------Processing follow ------------------
+
 memline = 0
+ExecutedInstr = 1
 while(memline < len(mem)):
     opcode = mem[int(memline)][7:10]
     #-----Print Simulator Result-----
@@ -76,6 +78,7 @@ while(memline < len(mem)):
     while j < (len(reg)):
         print("     reg[ " + str(j) +  " ] " + str(reg[j]))
         j = j + 1
+    print("end state")
     #ADD
     if (opcode == "000"):
         rs = int(mem[int(memline)][10:13],2) 
@@ -136,5 +139,29 @@ while(memline < len(mem)):
     if (opcode == "111"):
         continue
     memline = memline + 1
+    ExecutedInstr = ExecutedInstr + 1
 
+#-----Final Print Simulator Result-----
+print("Total of " +str(ExecutedInstr) +" instructions executed")
+print("Final State of Machine :")
+print("@@@")
+print("state :")
+print("     PC : " + str(memline + 1))
+#-----Print Memory-----
+print("     memory :")
+i = 0
+while i < (len(mem)):
+    if(mem[i][0:1] == "1"):
+        memPrint = int(add_binary_nums(sign_bit(mem[i]),'1'),2)*(-1)
+    else:
+        memPrint = int(mem[i],2)
+    print("     mem[ " + str(i) +  " ] " + str(memPrint))
+    i = i + 1
+#-----Print Register-----
+print("register :")
+j = 0
+while j < (len(reg)):
+    print("     reg[ " + str(j) +  " ] " + str(reg[j]))
+    j = j + 1 
+print("end state")   
     
