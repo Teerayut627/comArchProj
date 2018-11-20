@@ -35,13 +35,21 @@ with open('D:/CPE/ComArch/MachineCode.txt') as f:
     for i in lines:
         memory = i.split(' ')
         decimalCode.append(memory[0])
-
+    
+fi = open("D:/CPE/ComArch/ExSimulator.txt","w")
 #------------------Select only Machine Code------------------
 memDecimal = []
 for i in decimalCode:
     Soi = i.split('\n')
     memDecimal.append(Soi[0])
-print(memDecimal)
+
+example = 0
+fi.write("Run of Simulator")
+fi.write("\n")
+while example < (len(memDecimal)):
+    fi.write("     memory[ " + str(example) +  " ] = " + str(memDecimal[example]) +"\n")
+    example = example + 1 
+fi.write("\n")    
 
 #------------------Prepare Binarry Machinne Code in Memory for Processing------------------
 mem = []
@@ -59,26 +67,26 @@ ExecutedInstr = 1
 while(memline < len(mem)):
     opcode = mem[int(memline)][7:10]
     #-----Print Simulator Result-----
-    print("@@@")
-    print("state :")
-    print("     PC : " + str(memline))
+    fi.write("@@@" +"\n")
+    fi.write("state :" +"\n")
+    fi.write("     PC : " + str(memline) +"\n")
     #-----Print Memory-----
-    print("     memory :")
+    fi.write("     memory :" +"\n")
     i = 0
     while i < (len(mem)):
         if(mem[i][0:1] == "1"):
             memPrint = int(add_binary_nums(sign_bit(mem[i]),'1'),2)*(-1)
         else:
             memPrint = int(mem[i],2)
-        print("     mem[ " + str(i) +  " ] " + str(memPrint))
+        fi.write("     mem[ " + str(i) +  " ] " + str(memPrint) +"\n")
         i = i + 1
     #-----Print Register-----
-    print("register :")
+    fi.write("register :" +"\n")
     j = 0
     while j < (len(reg)):
-        print("     reg[ " + str(j) +  " ] " + str(reg[j]))
+        fi.write("     reg[ " + str(j) +  " ] " + str(reg[j]) +"\n")
         j = j + 1
-    print("end state")
+    fi.write("end state" +"\n")
     #ADD
     if (opcode == "000"):
         rs = int(mem[int(memline)][10:13],2) 
@@ -133,7 +141,7 @@ while(memline < len(mem)):
             memline = reg[rs]
     #HALT
     if (opcode == "110"):
-        print("Machine halted")
+        fi.write("Machine halted" +"\n")
         break
     #NOOP
     if (opcode == "111"):
@@ -142,26 +150,26 @@ while(memline < len(mem)):
     ExecutedInstr = ExecutedInstr + 1
 
 #-----Final Print Simulator Result-----
-print("Total of " +str(ExecutedInstr) +" instructions executed")
-print("Final State of Machine :")
-print("@@@")
-print("state :")
-print("     PC : " + str(memline + 1))
+fi.write("Total of " +str(ExecutedInstr) +" instructions executed" +"\n")
+fi.write("Final State of Machine :" +"\n")
+fi.write("@@@" +"\n")
+fi.write("state :" +"\n")
+fi.write("     PC : " + str(memline + 1) +"\n")
 #-----Print Memory-----
-print("     memory :")
+fi.write("     memory :" +"\n")
 i = 0
 while i < (len(mem)):
     if(mem[i][0:1] == "1"):
         memPrint = int(add_binary_nums(sign_bit(mem[i]),'1'),2)*(-1)
     else:
         memPrint = int(mem[i],2)
-    print("     mem[ " + str(i) +  " ] " + str(memPrint))
+    fi.write("     mem[ " + str(i) +  " ] " + str(memPrint) +"\n")
     i = i + 1
 #-----Print Register-----
-print("register :")
+fi.write("register :" +"\n")
 j = 0
 while j < (len(reg)):
-    print("     reg[ " + str(j) +  " ] " + str(reg[j]))
+    fi.write("     reg[ " + str(j) +  " ] " + str(reg[j]) +"\n")
     j = j + 1 
-print("end state")   
+fi.write("end state" +"\n")   
     
