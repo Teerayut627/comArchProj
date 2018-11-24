@@ -30,13 +30,13 @@ def add_binary_nums(x, y) : #-----Add binary n bit-----
 
 #------------------Read Decimal Machine Code form text------------------
 decimalCode = []
-with open('D:/CPE/ComArch/MachineCode.txt') as f:
+with open('D:/CPE/ComArch/Multest.txt') as f:
     lines = f.readlines()
     for i in lines:
         memory = i.split(' ')
         decimalCode.append(memory[0])
     
-fi = open("D:/CPE/ComArch/ExSimulator.txt","w")
+fi = open("D:/CPE/ComArch/MulSimulator.txt","w")
 #------------------Select only Machine Code------------------
 memDecimal = []
 for i in decimalCode:
