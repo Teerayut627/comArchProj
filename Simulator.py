@@ -139,11 +139,12 @@ while(PC < len(mem)):
         rs = int(mem[int(PC)][10:13],2) 
         rt = int(mem[int(PC)][13:16],2) 
         offset = int(mem[int(PC)][16:32],2) 
-        addrValue = offset + int(reg[rs]) + PC
+        addrValue = offset + int(reg[rs])
         if(mem[addrValue][0:1] == "1"):
             reg[rt] = int(add_binary_nums(sign_bit(mem[addrValue]),'1'),2)*(-1)
         else:
             reg[rt] = int(mem[addrValue],2)
+
     #SW
     if (opcode == "011"):
         rs = int(mem[int(PC)][10:13],2) 

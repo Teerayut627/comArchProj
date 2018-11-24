@@ -1,3 +1,10 @@
+def RepresentsInt(s):
+    try: 
+        int(s)
+        return True
+    except ValueError:
+        return False
+
 def instuction(instr):
     #R-type
     if(instr == "add"):
@@ -68,7 +75,7 @@ def add_binary_nums(x, y) :
 
 
 decMem = []
-with open('D:/CPE/ComArch/assemblyMul.txt') as f:
+with open('D:/CPE/ComArch/AssemblyCode.txt') as f:
     lines = f.readlines()
     line_label = []
     fill_list = []
@@ -114,7 +121,7 @@ with open('D:/CPE/ComArch/assemblyMul.txt') as f:
                     break
                 count = count + 1
             if(find == True):
-                z = (count - current_address)
+                z = count
             decMem.append(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16),2))
             machine = str(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16),2))
     #.fill
@@ -151,11 +158,6 @@ with open('D:/CPE/ComArch/assemblyMul.txt') as f:
                 count = count + 1
             if(find == True): 
                 z = (count - current_address) - 1
-                # if(current_address > count): 
-
-                #     z = (count - current_address)
-                # else:
-                #     z = (count - current_address) - 1
             decMem.append(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16),2))
             machine = str(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16),2))
            
