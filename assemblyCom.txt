@@ -1,0 +1,166 @@
+ lw 0 1 n 
+ lw 0 2 r 
+ lw 0 4 Addr 
+ jalr 4 7 
+end halt *1
+combi beq 1 2 return1 
+ beq 0 2 return1 
+ lw 0 6 one 
+ sw 5 7 stack 
+ add 5 6 5 
+ sw 5 1 stack 
+ add 5 6 5 
+ sw 5 2 stack 
+ add 5 6 5
+ lw 0 6 neg 
+ add 1 6 1 
+ jalr 4 7 
+ lw 0 6 neg  *2 
+ add 5 6 5 
+ lw 5 2 stack 
+ add 5 6 5 
+ lw 5 1 stack 
+ add 5 6 5 
+ lw 5 7 stack 
+ add 1 6 1
+ add 2 6 2
+ sw 5 3 stack 
+ lw 0 6 one 
+ add 5 6 5 
+ sw 5 7 stack 
+ add 5 6 5 
+ jalr 4 7  
+ lw 0 6 neg *3
+ add 5 6 5 
+ lw 5 7 stack 
+ add 5 6 5 
+ lw 5 6 stack 
+ add 3 6 3 
+ jalr 7 6 
+return1 lw 0 3 one 
+ jalr 7 6 
+n .fill 4
+r .fill 2
+Addr .fill combi 
+one .fill 1 
+neg .fill -1 
+stack .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0  
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 
+ .fill 0 

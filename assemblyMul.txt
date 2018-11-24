@@ -10,8 +10,8 @@ zero add 3 3 3  ---pc8
  add 4 4 4  ---pc9
  beq 0 4 finish  ---pc10
  beq 0 0 loop  ---pc11
-finish halt 
-mcand .fill 3 
-mplier .fill 2 
-one .fill 1 
-result .fill 0 
+finish halt   ---pc12
+mcand .fill 32766  ---pc13
+mplier .fill 10383  ---pc14
+one .fill 1  ---pc15
+result .fill 0  ---pc16

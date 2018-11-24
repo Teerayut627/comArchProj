@@ -63,7 +63,7 @@ while(PC < len(mem)):
     print("state :")
     print("     PC : " + str(PC))
     #-----Print Memory-----
-    print("     memory :")
+    # print("     memory :")
     # i = 0
     # while i < (len(mem)):
     #     if(mem[i][0:1] == "1"):
@@ -98,15 +98,16 @@ while(PC < len(mem)):
         else:
             valueB = int(addBBinary,2)
 
+        
         addResult = valueA + valueB 
-
+        print(str(addResult) + " = " + str(valueA)+"+"+str(valueB))
         addResultBinary = bindigits(addResult,33)[-32:]
         if ( addResult < 0):
-            xxxx = int(add_binary_nums(sign_bit(addResultBinary),"1"),2)*(-1)
+            addResult10 = int(add_binary_nums(sign_bit(addResultBinary),"1"),2)*(-1)
         else:
-            xxxx = int(addResultBinary,2)
-
-        reg[destReg] = xxxx
+            addResult10 = int(addResultBinary,2)
+        
+        reg[destReg] = addResult10
 
 
     #NAND
@@ -151,7 +152,11 @@ while(PC < len(mem)):
         rt = int(mem[int(PC)][13:16],2) 
         offset = int(mem[int(PC)][16:32],2) 
         addrValue = offset + int(reg[rs])
-        mem[addrValue] = int(reg[rt],2)
+        print(str(reg[rs]) +" in " +str(rs) +" , " +str(reg[rt]) +" in "  +str(rt) +" " +str(offset))
+        print(addrValue)
+        mem[addrValue] =  bindigits(reg[rt],32)
+        print(bindigits(reg[rt],32))
+
     #BEQ
     if (opcode == "100"): 
         rs = int(mem[int(PC)][10:13],2) 
@@ -181,14 +186,17 @@ while(PC < len(mem)):
             PC = jampAddr
     #JALR
     if (opcode == "101"):
+        
         rs = int(mem[int(PC)][10:13],2) 
         rd = int(mem[int(PC)][13:16],2) 
-        if(rs == rd): #Have yet to Verify 
-            reg[rt] = PC
-            PC = reg[rs]
-        else: #if and else have the same process
-            reg[rt] = PC
-            PC = reg[rs]
+        print(mem[int(PC)][13:16])
+        print("yut")
+        print("Jump to " +str(reg[rs]))
+        reg[rd] = PC + 1
+        print("stored " +str(PC) +" in " + str(rd))
+        PC = int(reg[rs])
+        continue
+
     #HALT
     if (opcode == "110"):
         print("Machine halted")

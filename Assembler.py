@@ -75,17 +75,34 @@ def add_binary_nums(x, y) :
 
 
 decMem = []
-with open('D:/CPE/ComArch/AssemblyCode.txt') as f:
+with open('D:/CPE/ComArch/pow.txt') as f:
     lines = f.readlines()
     line_label = []
     fill_list = []
     fill_value = []
     machine = ""
     fi = open("D:/CPE/ComArch/Multest2.txt","w")
-#collect Label(instr[0])    
+
+# collect Label(instr[0])    
     for i in lines:
         instr = i.split(' ')
+        j = 0
+        while(j < len(line_label)):
+            if(line_label[j] == instr[0] and line_label[j] != ""):
+                print("error : label ซ้ำ")
+                break
+            j = j + 1
         line_label.append(instr[0])
+
+#check 16 bit
+    # for i in lines:
+    #     instr = i.split(' ')
+    #     if(RepresentsInt(instr[4]) == True):
+    #         check = bin(int(instr[4]))
+    #         if(len(check) > 16):
+    #             print("error : offset มากกว่า 16 bit")
+    #     else:
+    #         continue
 
 #collect Label(instr[0]) and fill_value
     for i in lines:
@@ -101,6 +118,7 @@ with open('D:/CPE/ComArch/AssemblyCode.txt') as f:
         #print(i)
         instr = i.split(' ')
         #print(len(instr))
+        
     #R-Type
         if(instr[1] == "add" or instr[1] == "nand"): 
             x = int(instr[2])
@@ -115,13 +133,18 @@ with open('D:/CPE/ComArch/AssemblyCode.txt') as f:
             z = instr[4]
             find = False
             count = 0
-            while(count < len(line_label)):
-                if(line_label[count] == instr[4]):
-                    find = True
+            if(RepresentsInt(z) == False):
+                while(count < len(line_label)):
+                    if(line_label[count] == instr[4]):
+                        find = True
+                        break
+                    count = count + 1
+                if(find == True):
+                    z = count
+                else:
+                    print(line_label)
+                    print("error : undefind labels at lw/sw")
                     break
-                count = count + 1
-            if(find == True):
-                z = count
             decMem.append(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16),2))
             machine = str(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16),2))
     #.fill
@@ -150,20 +173,25 @@ with open('D:/CPE/ComArch/AssemblyCode.txt') as f:
             z = instr[4]
             find = False
             count = 0
-            while(count < len(line_label)):
+            if(RepresentsInt(z) == False):
+                while(count < len(line_label)):
                 # print(line_label[count])
-                if(line_label[count] == instr[4]):
-                    find = True
+                    if(line_label[count] == instr[4]):
+                        find = True
+                        break
+                    count = count + 1
+                if(find == True): 
+                    z = (count - current_address) - 1
+                else:
+                    print("error : undefind labels at beq")
                     break
-                count = count + 1
-            if(find == True): 
-                z = (count - current_address) - 1
             decMem.append(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16),2))
             machine = str(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16),2))
            
     #J-Type       
         elif(instr[1] == "jalr"):
             x = int(instr[2])
+            y = int(instr[3])
             decMem.append(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3)+bindigits(0,16),2))
             machine = str(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3)+bindigits(0,16),2))
            

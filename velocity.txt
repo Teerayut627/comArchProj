@@ -1,0 +1,22 @@
+ lw 0 1 velo 
+ lw 0 7 at  
+ lw 0 2 speed 
+ lw 0 3 time 
+ lw 0 6 u 
+ lw 0 4 one  
+loop nand 2 4 5 
+ nand 5 5 5  
+ beq 0 5 zero 
+ add 7 3 7   
+zero add 3 3 3  
+ add 4 4 4      
+ beq 0 4 finish  
+ beq 0 0 loop  
+finish add 6 7 1  
+ halt 
+at .fill 0  
+one .fill 1 
+velo .fill 0 
+u .fill 5 
+speed .fill 3 
+time .fill 10 
