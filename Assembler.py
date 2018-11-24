@@ -28,18 +28,6 @@ def instuction(instr):
         return "111"
     
 
-# def toBinary(i):
-#     if i == 0:
-#         return "0".zfill(3)
-#     s = ''
-#     while i:
-#         if i & 1 == 1:
-#             s = "1" + s
-#         else:
-#             s = "0" + s
-#         i //= 2
-#     return s.zfill(3)
-
 def bindigits(n, bits):
     s = bin(n & int("1"*bits, 2))[2:]
     return ("{0:0>%s}" % (bits)).format(s)
@@ -75,13 +63,13 @@ def add_binary_nums(x, y) :
 
 
 decMem = []
-with open('D:/CPE/ComArch/pow.txt') as f:
+with open('D:/CPE/ComArch/assemblyCom.txt') as f:
     lines = f.readlines()
     line_label = []
     fill_list = []
     fill_value = []
     machine = ""
-    fi = open("D:/CPE/ComArch/Multest2.txt","w")
+    fi = open("D:/CPE/ComArch/MachineCode.txt","w")
 
 # collect Label(instr[0])    
     for i in lines:
@@ -89,20 +77,10 @@ with open('D:/CPE/ComArch/pow.txt') as f:
         j = 0
         while(j < len(line_label)):
             if(line_label[j] == instr[0] and line_label[j] != ""):
-                print("error : label ซ้ำ")
+                print("error : label repeatedly")
                 break
             j = j + 1
         line_label.append(instr[0])
-
-#check 16 bit
-    # for i in lines:
-    #     instr = i.split(' ')
-    #     if(RepresentsInt(instr[4]) == True):
-    #         check = bin(int(instr[4]))
-    #         if(len(check) > 16):
-    #             print("error : offset มากกว่า 16 bit")
-    #     else:
-    #         continue
 
 #collect Label(instr[0]) and fill_value
     for i in lines:
@@ -142,13 +120,16 @@ with open('D:/CPE/ComArch/pow.txt') as f:
                 if(find == True):
                     z = count
                 else:
-                    print(line_label)
                     print("error : undefind labels at lw/sw")
                     break
             decMem.append(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16),2))
             machine = str(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16),2))
     #.fill
         elif(instr[1] == ".fill"):
+            if(RepresentsInt(instr[2]) == True):
+                if(int(instr[2]) > 32767 or int(instr[2]) < -32768):
+                    print("error : offsetField more than 16 bits")
+                    break
             x = instr[2]
             find = False
             count = 0
@@ -157,11 +138,13 @@ with open('D:/CPE/ComArch/pow.txt') as f:
                     find = True
                     break
                 count = count + 1
-            if(find == True):
-                z = count
-                decMem.append(int(z))
-                machine = str(int(z))
-                
+            if(RepresentsInt(instr[2]) == False):
+                if(find == True):
+                    z = count
+                    decMem.append(int(z))
+                    machine = str(int(z))
+                else:
+                    print("error : undefind labels at .fill")
             else:
                 decMem.append(int(x))
                 machine = str(int(x))
@@ -198,6 +181,10 @@ with open('D:/CPE/ComArch/pow.txt') as f:
         elif(instr[1] == "halt" or instr[1] == "noop"): #O-Type
             decMem.append(int(bindigits(0,7) + instuction(instr[1]) +bindigits(0,22),2))
             machine = str(int(bindigits(0,7) + instuction(instr[1]) +bindigits(0,22),2))
+            
+        else:
+            print("error : instruction error")
+            break
         
         current_address = current_address + 1 
         
