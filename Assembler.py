@@ -68,13 +68,13 @@ def add_binary_nums(x, y) :
 
 
 decMem = []
-with open('D:/CPE/ComArch/AssemblyCode.txt') as f:
+with open('D:/CPE/ComArch/assemblyMul.txt') as f:
     lines = f.readlines()
     line_label = []
     fill_list = []
     fill_value = []
     machine = ""
-    fi = open("D:/CPE/ComArch/MachineCode.txt","w")
+    fi = open("D:/CPE/ComArch/Multest2.txt","w")
 #collect Label(instr[0])    
     for i in lines:
         instr = i.split(' ')
@@ -117,7 +117,6 @@ with open('D:/CPE/ComArch/AssemblyCode.txt') as f:
                 z = (count - current_address)
             decMem.append(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16),2))
             machine = str(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16),2))
-       
     #.fill
         elif(instr[1] == ".fill"):
             x = instr[2]
@@ -152,6 +151,11 @@ with open('D:/CPE/ComArch/AssemblyCode.txt') as f:
                 count = count + 1
             if(find == True): 
                 z = (count - current_address) - 1
+                # if(current_address > count): 
+
+                #     z = (count - current_address)
+                # else:
+                #     z = (count - current_address) - 1
             decMem.append(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16),2))
             machine = str(int(bindigits(0,7) + instuction(instr[1]) +bindigits(x,3) +bindigits(y,3) + bindigits(int(z),16),2))
            
