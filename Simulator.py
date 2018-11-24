@@ -71,7 +71,7 @@ while(PC < len(mem)):
             memPrint = int(mem[i],2)
         print("     mem[ " + str(i) +  " ] " + str(memPrint))
         i = i + 1
-    -----Print Register-----
+    #-----Print Register-----
     print("register :")
     j = 0
     while j < (len(reg)):

@@ -63,7 +63,7 @@ def add_binary_nums(x, y) :
 
 
 decMem = []
-with open('D:/CPE/ComArch/assemblyCom.txt') as f:
+with open('D:/CPE/ComArch/power.txt') as f:
     lines = f.readlines()
     line_label = []
     fill_list = []
