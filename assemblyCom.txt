@@ -15,7 +15,7 @@ combi beq 1 2 return1
  lw 0 6 neg 
  add 1 6 1 
  jalr 4 7 
- lw 0 6 neg  *2 
+ lw 0 6 neg 
  add 5 6 5 
  lw 5 2 stack 
  add 5 6 5 
@@ -65,98 +65,6 @@ stack .fill 0
  .fill 0 
  .fill 0 
  .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0  
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0 
- .fill 0
  .fill 0 
  .fill 0 
  .fill 0 
