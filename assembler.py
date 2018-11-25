@@ -32,16 +32,6 @@ def instuction(instr): # รับคำสั่ง และ retrun opcode ข
 def bindigits(n, bits): # 
     s = bin(n & int("1"*bits, 2))[2:]
     return ("{0:0>%s}" % (bits)).format(s)
-
-def sign_bit (imm) : 
-    result = ''
-    imm = str(imm)
-    for i in imm :
-        if i == '1':
-            result = result + "0"
-        else :
-            result = result + "1"            
-    return add_binary_nums(result[0:-1], bin(1))
     
 def add_binary_nums(x, y) :
         max_len = max(len(x), len(y))
